@@ -2,15 +2,13 @@
 
 int main() {
 
-  int n,x,y,s;
+  int n,x,y,s,ay,ax;
   char c;
 
-  //  scanf("%d %d %d %c %d",&n,&x,&y,&c,&s);
-  n = 14;
-  x = 0;
-  y = 10;
-  c = 'U';
-  s = 19;
+  scanf("%d %d %d %c %d",&n,&x,&y,&c,&s);
+
+  ay = y;
+  ax = x;
 
 
   if(c == 'R'){
@@ -27,13 +25,19 @@ int main() {
       x = x%n;
     }
     if(x < 0){
-      x = (x*-1) % n ;
+      x = ax - s%n;
+      if(x < 0){
+        x = x + n;
+      }
     }
     if(y > n-1){
       y = y%n;
     }
     if(y < 0){
-      y = (y*-1) % n ;
+      y = ay - s%n;
+      if(y < 0){
+        y = y + n;
+      }
     }
 
   printf("%d %d",x,y);
