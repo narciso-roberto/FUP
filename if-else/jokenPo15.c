@@ -44,7 +44,9 @@ int main() {
         printf("Jogador 1");
     }else if(j1 == 9 && j2 == 1){
         printf("Jogador 1");
-    }else if()
+    }else{
+        printf("Jogador 2");
+    }
 
     if(j1 == 9 && (j2 >= 10  || j2 == 0)){
         printf("oi");
