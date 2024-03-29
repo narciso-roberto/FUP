@@ -47,10 +47,6 @@ int main() {
     }else{
         printf("Jogador 2");
     }
-
-    if(j1 == 9 && (j2 >= 10  || j2 == 0)){
-        printf("oi");
-    }
     
 
     return 0;
