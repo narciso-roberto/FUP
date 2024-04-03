@@ -16,7 +16,7 @@ int main()
     if(n == 0 || n == 1){
         printf("nao");
     }else if(cont > 0){
-        printf("nao");
+        printf("não");
     }else{
         printf("sim");
     }
