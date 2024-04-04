@@ -6,7 +6,8 @@ int main(){
     scanf("%d", &c);
     
     while(tot < c*2){
-        
+        #include<stdio.h>
+
         scanf("%d", &m);
         tot = tot + m;
 
@@ -20,5 +21,5 @@ int main(){
             printf("lotado\n");
         }
     }
-    
+
 }
