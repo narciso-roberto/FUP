@@ -10,14 +10,16 @@ const estilo ={
 
 const App = () => {
   const [dados,setDados] = React.useState(null)
+  const [carregando, setCarregando] = React.useState(null)
 
   async function initFetch({target}){
     let produtoLower = target.innerText.toLowerCase()
 
-    setDados({nome: "CARREGANDO..."})
+    setCarregando(true)
     const dadosObj = await (await fetch("https://ranekapi.origamid.dev/json/api/produto/"+produtoLower)).json()
 
     setDados(dadosObj)
+    setCarregando(false)
   }
 
   return(
@@ -28,7 +30,7 @@ const App = () => {
       <button onClick={initFetch}>Tablet</button>
     </ul>   
 
-    <Comp {...dados}/>
+    {carregando == true ? 'Carregando...' : <Comp {...dados}/>}
 
     </>
   )
