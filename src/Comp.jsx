@@ -1,8 +1,7 @@
 import React from 'react'
 
 const Comp = ({nome,preco,fotos}) => {
-
-  console.log(nome)
+  
   return (
     <div>
       <h1>{nome}</h1>

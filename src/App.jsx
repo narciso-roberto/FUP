@@ -9,11 +9,13 @@ const estilo ={
 }
 
 const App = () => {
-  const [dados,setDados] = React.useState({})
+  const [dados,setDados] = React.useState(null)
 
-  async function initFetch(link){
+  async function initFetch({target}){
+    let produtoLower = target.innerText.toLowerCase()
+
     setDados({nome: "CARREGANDO..."})
-    const dadosObj = await (await fetch(link)).json()
+    const dadosObj = await (await fetch("https://ranekapi.origamid.dev/json/api/produto/"+produtoLower)).json()
 
     setDados(dadosObj)
   }
@@ -21,9 +23,9 @@ const App = () => {
   return(
     <>
     <ul style={estilo}>
-      <button onClick={() => {initFetch("https://ranekapi.origamid.dev/json/api/produto/notebook")}}>Notebook</button>
-      <button onClick={() => {initFetch("https://ranekapi.origamid.dev/json/api/produto/smartphone")}}>Smartphone</button>
-      <button onClick={() => {initFetch("https://ranekapi.origamid.dev/json/api/produto/tablet")}}>Tablet</button>
+      <button onClick={initFetch}>Notebook</button>
+      <button onClick={initFetch}>Smartphone</button>
+      <button onClick={initFetch}>Tablet</button>
     </ul>   
 
     <Comp {...dados}/>
