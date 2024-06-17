@@ -1,12 +1,11 @@
 import React from 'react'
 
-const Comp = ({nome,preco,fotos}) => {
+const Comp = ({nome,preco}) => {
   
   return (
     <div>
       <h1>{nome}</h1>
-      <p>{preco ? 'R$'+preco : null}</p>
-      <img src={fotos ? fotos[0].src : ''}/>
+      <p>{preco && 'R$' + preco}</p>
     </div>
   )
 }

@@ -1,39 +1,39 @@
-import React from 'react';
-import Comp from './Comp';
+import React, { useEffect, useState } from 'react';
+import Comp from './Comp'
 
-
-const estilo ={
-  listStyle: 'none',
-  display: 'flex',
-  gap: '20px'
-}
 
 const App = () => {
-  const [dados,setDados] = React.useState(null)
-  const [carregando, setCarregando] = React.useState(null)
+
+  const [alvo,setAlvo] = useState(null)
 
   async function initFetch({target}){
-    let produtoLower = target.innerText.toLowerCase()
+    const produto = target.innerText.toLowerCase()
+    const produtoJSON = await (await fetch("https://ranekapi.origamid.dev/json/api/produto/"+produto)).json()
 
-    setCarregando(true)
-    const dadosObj = await (await fetch("https://ranekapi.origamid.dev/json/api/produto/"+produtoLower)).json()
-
-    setDados(dadosObj)
-    setCarregando(false)
+    setAlvo(produtoJSON)
+    localStorage.produto = produtoJSON.id
   }
 
-  return(
-    <>
-    <ul style={estilo}>
-      <button onClick={initFetch}>Notebook</button>
-      <button onClick={initFetch}>Smartphone</button>
-      <button onClick={initFetch}>Tablet</button>
-    </ul>   
+  async function initPage(produto){
+    const produtoJSON = await (await fetch("https://ranekapi.origamid.dev/json/api/produto/"+produto)).json()
+    setAlvo(produtoJSON)
+  }
 
-    {carregando == true ? 'Carregando...' : <Comp {...dados}/>}
+  useEffect(() => {
+    if(localStorage.produto){
+      initPage(localStorage.produto)
+    }
+  },[])
 
-    </>
-  )
+  
+
+  return(<>
+  <h1>Preferencia: {alvo && alvo.nome}</h1>
+  <button onClick={initFetch}>Notebook</button>
+  <button onClick={initFetch}>Smartphone</button>
+  
+  <Comp {...alvo}/>
+  </>)
 };
 
 export default App;
