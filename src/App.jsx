@@ -6,33 +6,29 @@ const App = () => {
 
   const [alvo,setAlvo] = useState(null)
 
-  async function initFetch({target}){
-    const produto = target.innerText.toLowerCase()
-    const produtoJSON = await (await fetch("https://ranekapi.origamid.dev/json/api/produto/"+produto)).json()
-
-    setAlvo(produtoJSON)
-    localStorage.produto = produtoJSON.id
-  }
-
-  async function initPage(produto){
-    const produtoJSON = await (await fetch("https://ranekapi.origamid.dev/json/api/produto/"+produto)).json()
-    setAlvo(produtoJSON)
-  }
-
-  useEffect(() => {
+  React.useEffect(() => {
     if(localStorage.produto){
-      initPage(localStorage.produto)
+      setAlvo(localStorage.produto)
     }
   },[])
 
-  
+  React.useEffect(() => {
+    if(alvo)
+      localStorage.produto = alvo
+  },[alvo])
+
+  function click({target}){
+    setAlvo(target.innerText.toLowerCase())
+  }
+
 
   return(<>
-  <h1>Preferencia: {alvo && alvo.nome}</h1>
-  <button onClick={initFetch}>Notebook</button>
-  <button onClick={initFetch}>Smartphone</button>
+  <h1>Preferencia: {alvo}</h1>
+  <button onClick={click}>Notebook</button>
+  <button onClick={click}>Smartphone</button>
   
-  <Comp {...alvo}/>
+  <Comp produto={alvo}/>
+  {/* se voce colocar um ternario aki nao seria melhor ? */}
   </>)
 };
 
