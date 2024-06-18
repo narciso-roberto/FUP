@@ -1,35 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Comp from './Comp'
 
 
 const App = () => {
+  const [comentario,setComentario] = React.useState(['teste1','teste2'])
+  const [input,setInput] = React.useState('')
+  const campo = React.useRef()
 
-  const [alvo,setAlvo] = useState(null)
-
-  React.useEffect(() => {
-    if(localStorage.produto){
-      setAlvo(localStorage.produto)
-    }
-  },[])
-
-  React.useEffect(() => {
-    if(alvo)
-      localStorage.produto = alvo
-  },[alvo])
-
-  function click({target}){
-    setAlvo(target.innerText.toLowerCase())
+  function click(){
+    setComentario([...comentario, campo.current.value])
+    setInput('')
+    campo.current.focus()
   }
 
-
-  return(<>
-  <h1>Preferencia: {alvo}</h1>
-  <button onClick={click}>Notebook</button>
-  <button onClick={click}>Smartphone</button>
-  
-  <Comp produto={alvo}/>
-  {/* se voce colocar um ternario aki nao seria melhor ? */}
-  </>)
+  return (<div>
+    <ul>
+      {comentario.map((text) => {
+        return <li key={text}>{text}</li>
+      })}
+    </ul>
+    <input
+        type="text"
+        value={input}
+        ref={campo}
+        onChange={({ target }) => setInput(target.value)}
+      />
+      <br />
+      <button onClick={click}>Enviar</button>
+    </div>
+  );
 };
 
 export default App;

@@ -1,28 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-const Comp = ({produto}) => {
-
-    const [alvo,setAlvo] = useState(null)
+const Comp = () => {
   
-    useEffect(() => {
-      if(produto != null){
-        async function pull(){
-          const dadosJson = await (await fetch('https://ranekapi.origamid.dev/json/api/produto/'+produto)).json()
-          setAlvo(dadosJson)
-        }
-        pull()
-      }
-        
-    },[produto])
 
-    if(alvo!= null){
-      return (
-        <div>
-          <h1>{alvo.nome}</h1>
-          <p>{alvo.preco}</p>
-        </div>
-      )
-    }
-}
+  return <p>Produto</p>;
+};
+
 
 export default Comp
