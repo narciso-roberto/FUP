@@ -1,34 +1,31 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Comp from './Comp'
 
 
 const App = () => {
-  const [comentario,setComentario] = React.useState(['teste1','teste2'])
-  const [input,setInput] = React.useState('')
-  const campo = React.useRef()
+  const [compra, setCompra] = React.useState(0)
+  const [notificacao, setNotificacao] = React.useState(null)
+  let intervalo = useRef()
 
   function click(){
-    setComentario([...comentario, campo.current.value])
-    setInput('')
-    campo.current.focus()
+    setCompra(compra+1)
+
+    clearInterval(intervalo.current)
+
+    setNotificacao('Obrigado pela compra')
+
+    intervalo.current = setInterval(() => {setNotificacao('')},2000)
+
+    
+    
   }
 
-  return (<div>
-    <ul>
-      {comentario.map((text) => {
-        return <li key={text}>{text}</li>
-      })}
-    </ul>
-    <input
-        type="text"
-        value={input}
-        ref={campo}
-        onChange={({ target }) => setInput(target.value)}
-      />
-      <br />
-      <button onClick={click}>Enviar</button>
+  return(
+    <div>
+      <button onClick={click}>Adicionar Carrinho</button>
+      <p>{notificacao}</p>
     </div>
-  );
+  )
 };
 
 export default App;
