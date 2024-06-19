@@ -1,19 +1,23 @@
 import React from 'react';
-import Produto from './Produto';
-import { ArmazenGlobais} from './GlobalContext';
+import useLocalStorage from './Produto';
 
 
 const App = () => {
 
+  const [produtoPref,setProdutoPref] = useLocalStorage('prodPref','novo')
 
-  return(
+  
+  function click(event){
+    setProdutoPref(event.target.innerText)
+  }
+
+  return (
     <div>
-      <ArmazenGlobais>
-        <Produto/>
-      </ArmazenGlobais>
-      
+      <p>Preferido: {produtoPref}</p>
+      <button onClick={click}>notebook</button>
+      <button onClick={click}>smartphone</button>
     </div>
-  )
+  );
 };
 
 export default App;

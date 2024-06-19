@@ -1,20 +1,18 @@
 import React from 'react'
-import { dadosGlobais } from './GlobalContext'
 
-const Produto = () => {
+const useLocalStorage = (key,inicial) => {
+    const [state,setState] = React.useState(() => {
+        const local = window.localStorage.getItem(key)
+        return local ? local : inicial
+    })
 
-    const dadosProduto = React.useContext(dadosGlobais)
+    React.useEffect(() => {
+        window.localStorage.setItem(key,state)
+    },[state,key])
 
-    return (
-        <ul>
-            {dadosProduto.dados && dadosProduto.dados.map((produto,index) => {
-                return <li key={index}>{produto.id}</li>
-            })}
-            <button onClick={() => dadosProduto.limparDados()}>Limpar</button>
-        </ul>
-        )
-    
   
-}
+    return [state,setState];
+  };
+  
 
-export default Produto
+export default useLocalStorage
