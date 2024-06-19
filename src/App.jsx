@@ -1,23 +1,26 @@
 import React from 'react';
-import useLocalStorage from './Produto';
-
+import useFetch from './useFetch';
 
 const App = () => {
 
-  const [produtoPref,setProdutoPref] = useLocalStorage('prodPref','novo')
+  const {data,request,load,erro} = useFetch()
 
+
+  React.useEffect(() => {
+    request('https://ranekapi.origamid.dev/json/api/produto')
+  },[request])
+
+  if(erro) return <div>{erro}</div>
+  if(load) return <div>carregando</div>
+  if(data)
+    return (
+      <ul>
+        {data.map((prod) => {
+          return <li key={prod.id}>{prod.nome}</li>
+        })}
+      </ul>
+    );
   
-  function click(event){
-    setProdutoPref(event.target.innerText)
-  }
-
-  return (
-    <div>
-      <p>Preferido: {produtoPref}</p>
-      <button onClick={click}>notebook</button>
-      <button onClick={click}>smartphone</button>
-    </div>
-  );
 };
 
 export default App;
