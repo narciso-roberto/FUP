@@ -1,9 +1,4 @@
 import React from 'react';
-// import Input from './inputs/Input';
-// import Select from './inputs/Select';
-import Radio from './inputs/Radio';
-// import CheckBox from './inputs/CheckBox';
-// import useForm from './Hooks/useForm';
 
 const perguntas = [
   {
@@ -49,7 +44,6 @@ const App = () => {
 
   const {id,resposta,options,pergunta} = perguntas[ask]
 
-  
   function handleSkip(even){
     even.preventDefault()
     
@@ -65,20 +59,19 @@ const App = () => {
     setEscolha(target.value)
   }
   
-
-    return (
+  return (
       <>
       <form>
-        {pergunta}
+        <span style={{fontWeight:'bold'}}>{pergunta}</span>
         {options.map((op,i) => {
           return <>
-          <label key={i}>
+          <label key={i} style={{marginLeft:'20px'}}>
             <input type='radio' checked={op == escolha ? true : false} value={op} name={id} id={id} onChange={hanldeChange}/>
             {op}
           </label>
           </>
         })}
-        <button onClick={handleSkip}></button>
+        <button onClick={handleSkip} style={{marginTop:'20px'}}>Proxima</button>
       </form>
       
       </>
@@ -88,12 +81,6 @@ const App = () => {
     return(
       <p>Voce acertou {pontos} de 4</p>
     )
-    
-  
-};
+  };
 
-
-
-
-
-export default App;
+  export default App;
