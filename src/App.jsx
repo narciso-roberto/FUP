@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Radio from './inputs/Radio';
 
 const perguntas = [
   {
@@ -37,50 +38,41 @@ const perguntas = [
 
 
 const App = () => {
-  const [ask,setAsk] = React.useState(0)
-  const [pontos,setPontos] = React.useState(0)
-  const [escolha,setEscolha] = React.useState(null)
-  if(perguntas[ask]){
+  const [slide,setSlide] = useState(0)
+  const [select,setSelect] = useState({p1:'',p2:'',p3:'',p4:''})
+  const [resultado,setResultado] = useState(null)
 
-  const {id,resposta,options,pergunta} = perguntas[ask]
-
-  function handleSkip(even){
-    even.preventDefault()
-    
-    if(escolha == resposta){
-      setPontos(pontos + 1)
-    }
-    
-    setAsk(ask+1)
-    setEscolha(null)
+  function handleChange({target}){
+    setSelect({...select, [target.id]: target.value})
   }
 
-  function hanldeChange({target}){
-    setEscolha(target.value)
+  function handleClick(){
+    setSlide(slide+1)
   }
-  
+
+  function pontos(){
+    const acertos = perguntas.filter((request) => request.resposta == select[request.id])
+    setResultado("Voce acertou "+ acertos.length +" de "+ perguntas.length)
+  }
+
+  if(slide < perguntas.length)
   return (
+    <form onSubmit={(even) => {even.preventDefault()}}>
       <>
-      <form>
-        <span style={{fontWeight:'bold'}}>{pergunta}</span>
-        {options.map((op,i) => {
-          return <>
-          <label key={i} style={{marginLeft:'20px'}}>
-            <input type='radio' checked={op == escolha ? true : false} value={op} name={id} id={id} onChange={hanldeChange}/>
-            {op}
-          </label>
-          </>
-        })}
-        <button onClick={handleSkip} style={{marginTop:'20px'}}>Proxima</button>
-      </form>
-      
+      {perguntas.map((quest,index) => {
+        return(<>
+        <Radio handleChange={handleChange} ativo={slide == index} {...quest}/>
+        </>)
+      })}
       </>
+      <button onClick={handleClick}>proxima</button>
+    </form>
     );
-  
-  }else
-    return(
-      <p>Voce acertou {pontos} de 4</p>
-    )
-  };
+
+  else
+  return(<>
+    {!resultado ? pontos() : resultado}
+  </>)
+  }
 
   export default App;
