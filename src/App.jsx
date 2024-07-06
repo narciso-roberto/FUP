@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Contato from './Contato';
-import Produtos from './Produtos';
+import ProdutoEspec from './ProdutoEspec'
+import ShowProdutos from './ShowProdutos';
 
 
 const App = () => {
@@ -12,12 +13,12 @@ const App = () => {
   // https://ranekapi.origamid.dev/json/api/produto/notebook
 
 
-  
   return (<>
     <BrowserRouter>
       <Header/>
       <Routes>
-        <Route path='*' element={<Produtos/>}/>
+        <Route path='*' element={<ShowProdutos/>}/>
+        <Route path="produto/:id" element={<ProdutoEspec/>}/>
         <Route path='contato' element={<Contato/>}/>
       </Routes>
     </BrowserRouter>
