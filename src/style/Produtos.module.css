@@ -1,0 +1,33 @@
+.containerProdutos{
+    max-width: 900px;
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.containerProdutos img{
+    border-radius: 10px;
+}
+
+.produto h1{
+    margin-top: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
