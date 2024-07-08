@@ -1,28 +1,27 @@
-
 .bgHeader{
-   background-color: rgb(226, 226, 226);
-}
-
-.containerHeader{
-    max-width: 1200px;
-    margin: 0px auto;
-}
-
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px ;
-}
-
-.header ul{
-    display: flex;
-    font-size: 1.3rem;
-    gap: 10px;
-}
-
-.header li{
-    background-color: rgb(216, 216, 216);
-    padding: 10px 20px;
-    border-radius: 10px;
-}
+    background-color: rgb(226, 226, 226);
+ }
+ 
+ .containerHeader{
+     max-width: 1200px;
+     margin: 0px auto;
+ }
+ 
+ .header{
+     display: flex;
+     align-items: center;
+     justify-content: space-around;
+     padding: 10px ;
+ }
+ 
+ .header ul{
+     display: flex;
+     font-size: 1.3rem;
+     gap: 10px;
+ }
+ 
+ .header li{
+     background-color: rgb(216, 216, 216);
+     padding: 10px 20px;
+     border-radius: 10px;
+ }
