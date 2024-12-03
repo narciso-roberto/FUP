@@ -1,19 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Header';
-import Produtos from './Produtos';
+import "./geral.css";
 
 const App = () => {
 
 
-  return (<>
-    <BrowserRouter>
+  return (
+  <>
     <Header/>
-      <Routes>
-        <Route path='' element={<Produtos/>}/>
-        <Route path='produtos/:id'/>
-      </Routes>
-    </BrowserRouter>
+
+    
   </>);
 }
 

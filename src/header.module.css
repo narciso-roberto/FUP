@@ -1,0 +1,28 @@
+
+.header{
+    background-color: #121212;
+    border-bottom: 2px solid #FFD600;
+    padding: 30px 0px;
+}
+
+.header h1{
+    font-size: 2rem;
+}
+
+.navegacao{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navegacao ul{
+    display: flex;
+    justify-content: space-around;
+    gap: 35px;
+    font-size: 1.3rem;
+}
+
+.navegacao ul a{
+    text-decoration: none;
+    color: #fff;
+}
